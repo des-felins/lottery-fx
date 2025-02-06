@@ -40,8 +40,8 @@ public class LotteryController implements Initializable {
 
     @FXML
     void removeCandidateAndRepeat() {
-        names.removeLast();
         name.setValue(names.getFirst());
+        names.removeLast();
         count = 0;
         shuffle(names);
 

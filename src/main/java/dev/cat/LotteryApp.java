@@ -3,7 +3,7 @@ package dev.cat;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -19,9 +19,8 @@ public class LotteryApp extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URL("file:src/main/resources/data-view.fxml"));
-        VBox vbox = loader.load();
-
-        Scene scene = new Scene(vbox);
+        BorderPane pane = loader.load();
+        Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -31,9 +30,9 @@ public class LotteryApp extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URL("file:src/main/resources/randomizer.fxml"));
-        VBox vbox = loader.load();
+        BorderPane pane = loader.load();
 
-        Scene sceneTwo = new Scene(vbox);
+        Scene sceneTwo = new Scene(pane);
         stage.setScene(sceneTwo);
         stage.show();
 
