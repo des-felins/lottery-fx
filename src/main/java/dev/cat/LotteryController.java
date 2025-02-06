@@ -36,12 +36,12 @@ public class LotteryController implements Initializable {
     @FXML
     void congratulate(ActionEvent event) {
         name.setValue("Congratulations, " + name.getValue() + "!");
-
     }
 
     @FXML
     void removeCandidateAndRepeat() {
         names.removeLast();
+        name.setValue(names.getFirst());
         count = 0;
         shuffle(names);
 
@@ -61,7 +61,7 @@ public class LotteryController implements Initializable {
 
     private void playAnimation() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.2), e -> getNewName()));
-        timeline.setCycleCount(names.size() - 1);
+        timeline.setCycleCount(names.size());
         timeline.play();
     }
 
