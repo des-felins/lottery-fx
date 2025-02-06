@@ -10,17 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LotteryController implements Initializable {
 
@@ -28,6 +19,8 @@ public class LotteryController implements Initializable {
     private Label dataLabel;
 
     private List<String> names = new ArrayList<>();
+
+    DataHolder dataHolder = DataHolder.getInstance();
 
     StringProperty name = new SimpleStringProperty();
     int count = 0;
@@ -52,11 +45,20 @@ public class LotteryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         dataLabel.textProperty().bind(name);
 
-        getText();
+        getData();
         shuffle(names);
         playAnimation();
 
 
+    }
+
+    private void getData() {
+        List<String> data = Arrays.stream(
+                        dataHolder.getParticipants()
+                                .split(System.lineSeparator()))
+                .toList();
+
+        names.addAll(data);
     }
 
     private void playAnimation() {
@@ -74,27 +76,4 @@ public class LotteryController implements Initializable {
         Collections.shuffle(names);
     }
 
-
-    public void getText() {
-
-        List<String> data;
-
-        Path path = Paths.get("src/main/resources/data", "participants.txt");
-        if (!Files.exists(path)) {
-            throw new IllegalArgumentException("Path doesn't exist");
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/participants.txt"))) {
-
-            data = reader.lines()
-                    .map(it -> it.split(System.lineSeparator())[0])
-                    .toList();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        names.addAll(data);
-
-    }
 }
