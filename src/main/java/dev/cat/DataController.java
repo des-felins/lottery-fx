@@ -4,19 +4,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
+import java.util.stream.Collectors;
+
 public class DataController {
 
     @FXML
     private TextArea text;
 
-    DataHolder data = DataHolder.getInstance();
-
     @FXML
     void startLottery(ActionEvent event) throws Exception {
-
-        data.setParticipants(text.getText());
-        LotteryApp.switchScene();
-
+        if (!text.getText().isEmpty()) {
+            LotteryApp.switchToLotteryScene(text.getText().lines().collect(Collectors.toSet()));
+        }
 
     }
 

@@ -6,7 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.net.URL;
+import java.net.URI;
+import java.util.Set;
 
 public class LotteryApp extends Application {
 
@@ -18,7 +19,7 @@ public class LotteryApp extends Application {
         stage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL("file:src/main/resources/data-view.fxml"));
+        loader.setLocation(new URI("file:src/main/resources/data-view.fxml").toURL());
         BorderPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -26,15 +27,20 @@ public class LotteryApp extends Application {
 
     }
 
-    public static void switchScene() throws Exception {
+    public static void switchToLotteryScene(Set<String> list) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL("file:src/main/resources/randomizer.fxml"));
+        loader.setLocation(new URI("file:src/main/resources/randomizer.fxml").toURL());
         BorderPane pane = loader.load();
+
+        LotteryController controller = loader.getController();
+        controller.extractData(list);
 
         Scene sceneTwo = new Scene(pane);
         stage.setScene(sceneTwo);
         stage.show();
+
+        controller.shuffleAndDisplayNames();
 
     }
 

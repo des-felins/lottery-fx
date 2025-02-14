@@ -1,6 +1,8 @@
 package dev.cat;
 
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,16 +21,30 @@ public class LotteryController implements Initializable {
     private Label dataLabel;
 
     private List<String> names = new ArrayList<>();
-
-    DataHolder dataHolder = DataHolder.getInstance();
+    private List<String> selectedNames = new ArrayList<>();
 
     StringProperty name = new SimpleStringProperty();
     int count = 0;
+
+    private static final String LABEL_FOR_WINNER = "-fx-text-fill: #56A458;";
 
 
     @FXML
     void congratulate(ActionEvent event) {
         name.setValue("Congratulations, " + name.getValue() + "!");
+        addAnimationToLabel();
+
+    }
+
+    private void addAnimationToLabel() {
+        dataLabel.setStyle(LABEL_FOR_WINNER);
+
+        ScaleTransition scale = new ScaleTransition(Duration.seconds(1), dataLabel);
+        scale.setByX(0.5);
+        scale.setByY(0.5);
+        scale.setCycleCount(4);
+        scale.setAutoReverse(true);
+        scale.play();
     }
 
     @FXML
@@ -36,38 +52,39 @@ public class LotteryController implements Initializable {
         name.setValue(names.getFirst());
         names.removeLast();
         count = 0;
-        shuffle(names);
-
-        playAnimation();
+        selectedNames.clear();
+        shuffleAndDisplayNames();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dataLabel.textProperty().bind(name);
+    }
 
-        getData();
+    public void shuffleAndDisplayNames() {
         shuffle(names);
+        if (names.size() > 50) {
+            for (int i = names.size() - 50; i < names.size(); i++) {
+                selectedNames.add(names.get(i));
+            }
+        } else {
+            selectedNames.addAll(names);
+        }
+
         playAnimation();
-
-
     }
 
-    private void getData() {
-        List<String> data = Arrays.stream(
-                        dataHolder.getParticipants()
-                                .split(System.lineSeparator()))
-                .toList();
-
-        names.addAll(data);
-    }
 
     private void playAnimation() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.2), e -> getNewName()));
+
+        Interpolator.EASE_OUT.interpolate(100, 1000, 0.98);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.02), e -> getNextName()));
         timeline.setCycleCount(names.size());
         timeline.play();
     }
 
-    private void getNewName() {
+    private void getNextName() {
         name.setValue(names.get(count));
         count++;
     }
@@ -76,4 +93,7 @@ public class LotteryController implements Initializable {
         Collections.shuffle(names);
     }
 
+    public void extractData(Set<String> list) {
+        names.addAll(list);
+    }
 }
