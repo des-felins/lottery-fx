@@ -26,6 +26,8 @@ public class LotteryController implements Initializable {
     StringProperty name = new SimpleStringProperty();
     int count = 0;
 
+    private boolean needToMaskEmails;
+
     private static final String LABEL_FOR_WINNER = "-fx-text-fill: #56A458;";
 
 
@@ -63,12 +65,22 @@ public class LotteryController implements Initializable {
 
     public void shuffleAndDisplayNames() {
         shuffle(names);
+
         if (names.size() > 50) {
             for (int i = names.size() - 50; i < names.size(); i++) {
                 selectedNames.add(names.get(i));
             }
         } else {
             selectedNames.addAll(names);
+        }
+
+        if (needToMaskEmails) {
+            int i = 0;
+            for (String email : selectedNames) {
+                selectedNames.set(i, email.replaceAll(email.substring(
+                        email.indexOf('@')), "*****"));
+                i++;
+            }
         }
 
         playAnimation();
@@ -80,12 +92,12 @@ public class LotteryController implements Initializable {
         Interpolator.EASE_OUT.interpolate(100, 1000, 0.98);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.02), e -> getNextName()));
-        timeline.setCycleCount(names.size());
+        timeline.setCycleCount(selectedNames.size());
         timeline.play();
     }
 
     private void getNextName() {
-        name.setValue(names.get(count));
+        name.setValue(selectedNames.get(count));
         count++;
     }
 
@@ -93,7 +105,8 @@ public class LotteryController implements Initializable {
         Collections.shuffle(names);
     }
 
-    public void extractData(Set<String> list) {
+    public void extractData(Set<String> list, boolean needMasking) {
         names.addAll(list);
+        needToMaskEmails = needMasking;
     }
 }

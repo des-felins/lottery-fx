@@ -27,14 +27,14 @@ public class LotteryApp extends Application {
 
     }
 
-    public static void switchToLotteryScene(Set<String> list) throws Exception {
+    public static void switchToLotteryScene(Set<String> list, boolean needMasking) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URI("file:src/main/resources/randomizer.fxml").toURL());
         BorderPane pane = loader.load();
 
         LotteryController controller = loader.getController();
-        controller.extractData(list);
+        controller.extractData(list, needMasking);
 
         Scene sceneTwo = new Scene(pane);
         stage.setScene(sceneTwo);
