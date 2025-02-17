@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
@@ -20,6 +21,12 @@ public class LotteryController implements Initializable {
     @FXML
     private Label dataLabel;
 
+    @FXML
+    private Button presentButton;
+
+    @FXML
+    private Button repeatButton;
+
     private List<String> names = new ArrayList<>();
     private List<String> selectedNames = new ArrayList<>();
 
@@ -29,6 +36,12 @@ public class LotteryController implements Initializable {
     private boolean needToMaskEmails;
 
     private static final String LABEL_FOR_WINNER = "-fx-text-fill: #56A458;";
+
+    private static final String IDLE_REPEAT_BUTTON = "-fx-background-color: #C961B3;";
+    private static final String HOVERED_REPEAT_BUTTON = "-fx-background-color: #994187;";
+
+    private static final String IDLE_PRESENT_BUTTON = "-fx-background-color: #85D888;";
+    private static final String HOVERED_PRESENT_BUTTON = "-fx-background-color: #56A458;";
 
 
     @FXML
@@ -61,6 +74,13 @@ public class LotteryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dataLabel.textProperty().bind(name);
+
+        presentButton.setOnMouseEntered(e -> presentButton.setStyle(HOVERED_PRESENT_BUTTON));
+        presentButton.setOnMouseExited(e -> presentButton.setStyle(IDLE_PRESENT_BUTTON));
+
+        repeatButton.setOnMouseEntered(e -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
+        repeatButton.setOnMouseExited(e -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
+
     }
 
     public void shuffleAndDisplayNames() {

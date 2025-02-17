@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1D223B;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.cat.DataController">
    <top>
       <HBox prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="49.0" prefWidth="496.0" text="Put participants here:" textFill="WHITE">
+            <Label prefHeight="49.0" prefWidth="475.0" text="Put participants here:" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -22,9 +21,9 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <Button fx:id="scaleButton" mnemonicParsing="false" style="-fx-background-color: #8F949B;" text="Full Screen" textFill="WHITE">
+            <Button fx:id="scaleButton" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #D5D8DD;" text="Full Screen">
                <font>
-                  <Font name="Verdana" size="10.0" />
+                  <Font name="Verdana" size="13.0" />
                </font>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -49,7 +48,7 @@
    <bottom>
       <HBox prefHeight="51.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="24.0" prefWidth="466.0" text="Mask emails" textFill="WHITE">
+            <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="24.0" prefWidth="462.0" text="Mask emails" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Verdana" size="13.0" />
                </font>
@@ -57,7 +56,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </CheckBox>
-            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startLottery" style="-fx-background-color: #5BD5EF;" text="Start raffle!" textFill="WHITE">
+            <Button fx:id="startButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#startLottery" style="-fx-background-color: #5BD5EF;" text="Start raffle!" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
