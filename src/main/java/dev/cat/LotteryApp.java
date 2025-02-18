@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URI;
@@ -14,6 +13,8 @@ public class LotteryApp extends Application {
 
     private static Stage stage;
 
+    private static AnchorPane pane;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -21,7 +22,7 @@ public class LotteryApp extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URI("file:src/main/resources/data-view.fxml").toURL());
-        AnchorPane pane = loader.load();
+        pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -32,21 +33,12 @@ public class LotteryApp extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URI("file:src/main/resources/randomizer.fxml").toURL());
-        BorderPane pane = loader.load();
+        pane = loader.load();
+        stage.getScene().setRoot(pane);
 
         LotteryController controller = loader.getController();
         controller.extractData(list, needMasking);
-
-        Scene sceneTwo = new Scene(pane);
-
-        Stage secondStage = new Stage();
-        if(stage.isFullScreen()) {
-            secondStage.setFullScreen(true);
-        }
-        secondStage.setScene(sceneTwo);
-        secondStage.show();
-//        stage.setScene(sceneTwo);
-//        stage.show();
+        stage.show();
 
         controller.shuffleAndDisplayNames();
 

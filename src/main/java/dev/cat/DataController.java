@@ -47,8 +47,6 @@ public class DataController implements Initializable {
     @FXML
     void goFullScreen() {
         LotteryApp.switchToFullScreenMode();
-//        Stage stage = (Stage) fullScreenButton.getScene().getWindow();
-//        stage.setFullScreen(true);
     }
 
     @Override

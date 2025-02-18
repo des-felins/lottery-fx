@@ -1,6 +1,9 @@
 package dev.cat;
 
-import javafx.animation.*;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -106,19 +109,11 @@ public class LotteryController implements Initializable {
 
     private void playAnimation() {
 
-        Interpolator.EASE_OUT.interpolate(100, 1000, 0.98);
-
-
-//        KeyValue x = new KeyValue(circle.translateXProperty(), 200, Interpolator.DISCRETE);
-//        KeyFrame frame = new KeyFrame(Duration.seconds(5), x);
-//        Timeline timeline = new Timeline(frame);
-
+        int dur = Interpolator.EASE_OUT.interpolate(100, 1000, 0.98);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.03),
                 e -> getNextName()));
         timeline.setCycleCount(selectedNames.size());
-        //timeline.setCycleCount(50);
-        //timeline.setCycleCount(selectedNames.size() * 3);
         timeline.play();
     }
 
