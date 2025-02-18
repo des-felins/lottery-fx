@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,13 +24,13 @@ public class DataController implements Initializable {
     private Button startButton;
 
     @FXML
-    private Button scaleButton;
+    private Button fullScreenButton;
 
     private static final String IDLE_START_BUTTON = "-fx-background-color: #5BD5EF;";
     private static final String HOVERED_START_BUTTON = "-fx-background-color: #2FBEDD;";
 
-    private static final String IDLE_SCALE_BUTTON = "-fx-background-color: #D5D8DD;";
-    private static final String HOVERED_SCALE_BUTTON = "-fx-background-color: #8F949B;";
+    private static final String IDLE_FULL_SCREEN_BUTTON = "-fx-background-color: #D5D8DD;";
+    private static final String HOVERED_FULL_SCREEN_BUTTON = "-fx-background-color: #8F949B;";
 
 
     @FXML
@@ -43,13 +44,20 @@ public class DataController implements Initializable {
 
     }
 
+    @FXML
+    void goFullScreen() {
+        LotteryApp.switchToFullScreenMode();
+//        Stage stage = (Stage) fullScreenButton.getScene().getWindow();
+//        stage.setFullScreen(true);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_START_BUTTON));
         startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_START_BUTTON));
 
-        scaleButton.setOnMouseEntered(e -> scaleButton.setStyle(HOVERED_SCALE_BUTTON));
-        scaleButton.setOnMouseExited(e -> scaleButton.setStyle(IDLE_SCALE_BUTTON));
+        fullScreenButton.setOnMouseEntered(e -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseExited(e -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
 
     }
 }

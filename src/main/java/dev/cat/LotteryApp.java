@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URI;
@@ -39,11 +38,22 @@ public class LotteryApp extends Application {
         controller.extractData(list, needMasking);
 
         Scene sceneTwo = new Scene(pane);
-        stage.setScene(sceneTwo);
-        stage.show();
+
+        Stage secondStage = new Stage();
+        if(stage.isFullScreen()) {
+            secondStage.setFullScreen(true);
+        }
+        secondStage.setScene(sceneTwo);
+        secondStage.show();
+//        stage.setScene(sceneTwo);
+//        stage.show();
 
         controller.shuffleAndDisplayNames();
 
+    }
+
+    public static void switchToFullScreenMode() {
+        stage.setFullScreen(true);
     }
 
     public static void main(String[] args) {
