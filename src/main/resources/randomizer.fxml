@@ -11,7 +11,7 @@
     <children>
         <ButtonBar layoutY="346.0" prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: #1D223B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <buttons>
-                <Button fx:id="presentButton" mnemonicParsing="false" style="-fx-background-color: #85D888;" text="Present" textFill="WHITE">
+                <Button fx:id="presentButton" mnemonicParsing="false" onAction="#congratulate" style="-fx-background-color: #85D888;" text="Present" textFill="WHITE">
                     <font>
                         <Font name="Verdana" size="13.0" />
                     </font>

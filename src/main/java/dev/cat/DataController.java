@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,11 +33,11 @@ public class DataController implements Initializable {
 
 
     @FXML
-    void startLottery(ActionEvent event) throws Exception {
+    void startLottery() throws Exception {
 
         if (!text.getText().isEmpty()) {
             LotteryApp.switchToLotteryScene(
-                    text.getText().lines().collect(Collectors.toSet()),
+                    text.getText().lines().collect(Collectors.toList()),
                     checkBox.isSelected());
         }
 
@@ -51,11 +50,11 @@ public class DataController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_START_BUTTON));
-        startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_START_BUTTON));
+        startButton.setOnMouseEntered(_ -> startButton.setStyle(HOVERED_START_BUTTON));
+        startButton.setOnMouseExited(_ -> startButton.setStyle(IDLE_START_BUTTON));
 
-        fullScreenButton.setOnMouseEntered(e -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
-        fullScreenButton.setOnMouseExited(e -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseEntered(_ -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseExited(_ -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
 
     }
 }

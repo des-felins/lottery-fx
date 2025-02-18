@@ -18,6 +18,8 @@ import java.util.*;
 
 public class LotteryController implements Initializable {
 
+    public static final int POTENTIAL_WINNERS_LIST = 300;
+    public static final int TARGET_DURATION_MS = 2000;
     @FXML
     private Label dataLabel;
 
@@ -27,15 +29,13 @@ public class LotteryController implements Initializable {
     @FXML
     private Button repeatButton;
 
-    private List<String> names = new ArrayList<>();
-    private List<String> selectedNames = new ArrayList<>();
+    private Set<String> names = new HashSet<>();
 
     StringProperty name = new SimpleStringProperty();
-    int count = 0;
 
-    private boolean needToMaskEmails;
-
-    private static final String LABEL_FOR_WINNER = "-fx-text-fill: #56A458;";
+    private static final String LABEL_FOR_WINNER = "-fx-text-fill:  #7F38D8;";
+    private static final String LABEL_FOR_INTERMEDIATE_WINNER = "-fx-text-fill: #56A458;";
+    private static final String REGULAR_LABEL = "-fx-text-fill: #000000;";
 
     private static final String IDLE_REPEAT_BUTTON = "-fx-background-color: #C961B3;";
     private static final String HOVERED_REPEAT_BUTTON = "-fx-background-color: #994187;";
@@ -64,10 +64,8 @@ public class LotteryController implements Initializable {
 
     @FXML
     void removeCandidateAndRepeat() {
-        name.setValue(names.getFirst());
-        names.removeLast();
-        count = 0;
-        selectedNames.clear();
+        dataLabel.setStyle(REGULAR_LABEL);
+        names.remove(name.getValue());
         shuffleAndDisplayNames();
     }
 
@@ -75,62 +73,76 @@ public class LotteryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         dataLabel.textProperty().bind(name);
 
-        presentButton.setOnMouseEntered(e -> presentButton.setStyle(HOVERED_PRESENT_BUTTON));
-        presentButton.setOnMouseExited(e -> presentButton.setStyle(IDLE_PRESENT_BUTTON));
+        presentButton.setOnMouseEntered(_ -> presentButton.setStyle(HOVERED_PRESENT_BUTTON));
+        presentButton.setOnMouseExited(_ -> presentButton.setStyle(IDLE_PRESENT_BUTTON));
 
-        repeatButton.setOnMouseEntered(e -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
-        repeatButton.setOnMouseExited(e -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
+        repeatButton.setOnMouseEntered(_ -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
+        repeatButton.setOnMouseExited(_ -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
 
     }
 
     public void shuffleAndDisplayNames() {
-        shuffle(names);
+        List<String> intermediateNameHolder = new ArrayList<>(names);
+        shuffle(intermediateNameHolder);
 
-        if (names.size() > 50) {
-            for (int i = names.size() - 50; i < names.size(); i++) {
-                selectedNames.add(names.get(i));
-            }
-        } else {
-            selectedNames.addAll(names);
+        while (intermediateNameHolder.size() < POTENTIAL_WINNERS_LIST) {
+            List<String> tmp = new ArrayList<>(intermediateNameHolder);
+            shuffle(tmp);
+            intermediateNameHolder.addAll(tmp);
         }
 
-        if (needToMaskEmails) {
-            int i = 0;
-            for (String email : selectedNames) {
-                selectedNames.set(i, email.replaceAll(email.substring(
-                        email.indexOf('@')), "*****"));
-                i++;
-            }
+        if (intermediateNameHolder.size() > POTENTIAL_WINNERS_LIST) {
+            intermediateNameHolder = intermediateNameHolder.subList(0, POTENTIAL_WINNERS_LIST);
         }
 
-        playAnimation();
+        playAnimation(intermediateNameHolder);
     }
 
 
-    private void playAnimation() {
+    private void playAnimation(List<String> shuffledNames) {
 
-        int dur = Interpolator.EASE_OUT.interpolate(100, 1000, 0.98);
+        double totalDuration = 0.0;
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.03),
-                e -> getNextName()));
-        timeline.setCycleCount(selectedNames.size());
+        Timeline timeline = new Timeline();
+
+        Interpolator interpolator = new Interpolator() {
+            @Override
+            protected double curve(double t) {
+                return Math.sin((t * Math.PI) / 2);
+            }
+        };
+
+        for (int i = 0; i < shuffledNames.size(); i++) {
+
+            double dur = interpolator.interpolate(1, 1000, (double) i / shuffledNames.size());
+            totalDuration += dur;
+            var index = i;
+            KeyFrame frame = new KeyFrame(Duration.millis(totalDuration), _ -> name.setValue(shuffledNames.get(index)));
+            timeline.getKeyFrames().add(frame);
+            if (totalDuration > TARGET_DURATION_MS) {
+                break;
+            }
+        }
+
         timeline.play();
     }
 
-    private void getNextName() {
-        if (count >= selectedNames.size()) {
-            count = 0;
-        }
-        name.setValue(selectedNames.get(count));
-        count++;
-    }
 
     private void shuffle(List<String> names) {
         Collections.shuffle(names);
     }
 
-    public void extractData(Set<String> list, boolean needMasking) {
+    public void extractData(List<String> list, boolean needMasking) {
+
+        if (needMasking) {
+            int i = 0;
+            for (String email : list) {
+                list.set(i, email.replaceAll(email.substring(
+                        email.indexOf('@')), "*****"));
+                i++;
+            }
+        }
+
         names.addAll(list);
-        needToMaskEmails = needMasking;
     }
 }
