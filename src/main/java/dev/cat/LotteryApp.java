@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 public class LotteryApp extends Application {
@@ -19,7 +20,9 @@ public class LotteryApp extends Application {
         stage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URI("file:src/main/resources/data-view.fxml").toURL());
+        URL resourceUrl = LotteryApp.class.getClassLoader().getResource("data-view.fxml");
+        loader.setLocation(resourceUrl);
+
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -30,7 +33,9 @@ public class LotteryApp extends Application {
     public static void switchToLotteryScene(List<String> list, boolean needMasking) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URI("file:src/main/resources/randomizer.fxml").toURL());
+
+        URL resourceUrl = LotteryApp.class.getClassLoader().getResource("randomizer.fxml");
+        loader.setLocation(resourceUrl);
 
         AnchorPane pane = loader.load();
         stage.getScene().setRoot(pane);
