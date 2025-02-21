@@ -1,5 +1,6 @@
 package dev.cat;
 
+import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ public class LotteryApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
         stage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
