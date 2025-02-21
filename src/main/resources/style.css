@@ -1,0 +1,15 @@
+.text-area {
+-fx-text-box-border: #2C2C2C;
+}
+
+.text-area: focused {
+-fx-focus-color: transparent;
+}
+
+.text-area .viewport .content {
+   -fx-background-color: #2C2C2C;
+}
+
+.text-input {
+   -fx-text-fill: #FFFFFF;
+}

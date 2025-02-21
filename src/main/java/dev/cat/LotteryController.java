@@ -9,8 +9,11 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -24,6 +27,15 @@ public class LotteryController implements Initializable {
     private Label dataLabel;
 
     @FXML
+    private Label happyLabelLeft;
+
+    @FXML
+    private Label happyLabelCenter;
+
+    @FXML
+    private Label happyLabelRight;
+
+    @FXML
     private Button presentButton;
 
     @FXML
@@ -33,9 +45,7 @@ public class LotteryController implements Initializable {
 
     StringProperty name = new SimpleStringProperty();
 
-    private static final String LABEL_FOR_WINNER = "-fx-text-fill:  #7F38D8;";
-    private static final String LABEL_FOR_INTERMEDIATE_WINNER = "-fx-text-fill: #56A458;";
-    private static final String REGULAR_LABEL = "-fx-text-fill: #000000;";
+    private static final String LABEL_FOR_WINNER = "-fx-text-fill:  #C961B3;";
 
     private static final String IDLE_REPEAT_BUTTON = "-fx-background-color: #C961B3;";
     private static final String HOVERED_REPEAT_BUTTON = "-fx-background-color: #994187;";
@@ -54,6 +64,24 @@ public class LotteryController implements Initializable {
     private void addAnimationToLabel() {
         dataLabel.setStyle(LABEL_FOR_WINNER);
 
+        Image confetti = new Image(String.valueOf(LotteryController.class
+                .getClassLoader()
+                .getResource("confetti.gif")));
+        ImageView viewLeft = new ImageView(confetti);
+        ImageView viewCenter = new ImageView(confetti);
+        ImageView viewRight = new ImageView(confetti);
+
+
+        happyLabelLeft.setGraphic(viewLeft);
+        happyLabelLeft.setAlignment(Pos.TOP_LEFT);
+
+        happyLabelCenter.setGraphic(viewCenter);
+        happyLabelCenter.setAlignment(Pos.TOP_CENTER);
+
+        happyLabelRight.setGraphic(viewRight);
+        happyLabelRight.setAlignment(Pos.TOP_RIGHT);
+
+
         ScaleTransition scale = new ScaleTransition(Duration.seconds(1), dataLabel);
         scale.setByX(0.5);
         scale.setByY(0.5);
@@ -64,7 +92,6 @@ public class LotteryController implements Initializable {
 
     @FXML
     void removeCandidateAndRepeat() {
-        dataLabel.setStyle(REGULAR_LABEL);
         names.remove(name.getValue());
         shuffleAndDisplayNames();
     }

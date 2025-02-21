@@ -3,10 +3,10 @@ package dev.cat;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
@@ -25,7 +25,9 @@ public class LotteryApp extends Application {
 
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add("style.css");
         primaryStage.setScene(scene);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         primaryStage.show();
 
     }
