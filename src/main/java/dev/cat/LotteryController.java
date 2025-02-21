@@ -9,7 +9,6 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,16 +26,10 @@ public class LotteryController implements Initializable {
     private Label dataLabel;
 
     @FXML
-    private Label happyLabelLeft;
-
-    @FXML
-    private Label happyLabelCenter;
-
-    @FXML
-    private Label happyLabelRight;
-
-    @FXML
     private Button presentButton;
+
+    @FXML
+    private ImageView celebrationImage;
 
     @FXML
     private Button repeatButton;
@@ -64,22 +57,10 @@ public class LotteryController implements Initializable {
     private void addAnimationToLabel() {
         dataLabel.setStyle(LABEL_FOR_WINNER);
 
-        Image confetti = new Image(String.valueOf(LotteryController.class
+        Image fireworks = new Image(String.valueOf(LotteryController.class
                 .getClassLoader()
-                .getResource("confetti.gif")));
-        ImageView viewLeft = new ImageView(confetti);
-        ImageView viewCenter = new ImageView(confetti);
-        ImageView viewRight = new ImageView(confetti);
-
-
-        happyLabelLeft.setGraphic(viewLeft);
-        happyLabelLeft.setAlignment(Pos.TOP_LEFT);
-
-        happyLabelCenter.setGraphic(viewCenter);
-        happyLabelCenter.setAlignment(Pos.TOP_CENTER);
-
-        happyLabelRight.setGraphic(viewRight);
-        happyLabelRight.setAlignment(Pos.TOP_RIGHT);
+                .getResource("fireworks1.gif")));
+        celebrationImage.setImage(fireworks);
 
 
         ScaleTransition scale = new ScaleTransition(Duration.seconds(1), dataLabel);
