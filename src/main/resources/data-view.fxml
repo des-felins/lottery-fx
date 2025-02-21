@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.cat.DataController">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dev.cat.DataController">
     <children>
-        <Button fx:id="startButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#startLottery" prefHeight="38.0" prefWidth="147.0" style="-fx-background-color: #5BD5EF;" text="Start raffle!" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <font>
-                <Font name="Verdana" size="20.0" />
-            </font>
+        <Button fx:id="startButton" mnemonicParsing="false" styleClass="large rounded accent" onAction="#startLottery" text="Start raffle!"
+                AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
         </Button>
-        <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="27.0" prefWidth="316.0" text="Mask emails" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
-            <font>
-                <Font name="Verdana" size="20.0" />
-            </font>
+        <CheckBox fx:id="checkBox" mnemonicParsing="false" text="Mask emails"
+                  AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0">
         </CheckBox>
-        <Label layoutX="1.0" prefHeight="50.0" text="Put participants here:" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
-            <font>
-                <Font name="Verdana" size="24.0" />
-            </font>
+        <Label layoutX="1.0" prefHeight="50.0" text="Put participants here:" textFill="WHITE"
+               AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
         </Label>
-        <Button fx:id="fullScreenButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#goFullScreen" style="-fx-background-color: #1E1E1E;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-            <font>
-                <Font name="Verdana" size="13.0" />
-            </font>
+        <Button fx:id="fullScreenButton" mnemonicParsing="false" onAction="#goFullScreen" styleClass="button-icon button-outline"
+                AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         </Button>
-        <TextArea fx:id="text" layoutX="1.0" layoutY="60.0" prefHeight="192.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0">
-            <font>
-                <Font name="Verdana" size="16.0" />
-            </font>
+        <TextArea fx:id="text" layoutX="1.0" layoutY="60.0" minHeight="192.0" AnchorPane.bottomAnchor="70.0"
+                  AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0">
         </TextArea>
     </children>
 </AnchorPane>

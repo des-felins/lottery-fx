@@ -22,7 +22,7 @@ import java.util.*;
 public class LotteryController implements Initializable {
 
     public static final int POTENTIAL_WINNERS_LIST = 300;
-    public static final int TARGET_DURATION_MS = 2000;
+    public static final int TARGET_DURATION_MS = 20000;
     @FXML
     private Label dataLabel;
 
@@ -53,7 +53,6 @@ public class LotteryController implements Initializable {
     private static final String IDLE_PRESENT_BUTTON = "-fx-background-color: #85D888;";
     private static final String HOVERED_PRESENT_BUTTON = "-fx-background-color: #56A458;";
 
-
     @FXML
     void congratulate(ActionEvent event) {
         name.setValue("Congratulations, " + name.getValue() + "!");
@@ -71,7 +70,6 @@ public class LotteryController implements Initializable {
         ImageView viewCenter = new ImageView(confetti);
         ImageView viewRight = new ImageView(confetti);
 
-
         happyLabelLeft.setGraphic(viewLeft);
         happyLabelLeft.setAlignment(Pos.TOP_LEFT);
 
@@ -80,7 +78,6 @@ public class LotteryController implements Initializable {
 
         happyLabelRight.setGraphic(viewRight);
         happyLabelRight.setAlignment(Pos.TOP_RIGHT);
-
 
         ScaleTransition scale = new ScaleTransition(Duration.seconds(1), dataLabel);
         scale.setByX(0.5);
@@ -125,7 +122,6 @@ public class LotteryController implements Initializable {
         playAnimation(intermediateNameHolder);
     }
 
-
     private void playAnimation(List<String> shuffledNames) {
 
         double totalDuration = 0.0;
@@ -153,7 +149,6 @@ public class LotteryController implements Initializable {
 
         timeline.play();
     }
-
 
     private void shuffle(List<String> names) {
         Collections.shuffle(names);
