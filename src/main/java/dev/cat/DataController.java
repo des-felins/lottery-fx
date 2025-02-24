@@ -26,6 +26,7 @@ public class DataController implements Initializable {
     @FXML
     private Button fullScreenButton;
 
+
     private static final String IDLE_START_BUTTON = "-fx-background-color: #5BD5EF;";
     private static final String HOVERED_START_BUTTON = "-fx-background-color: #2FBEDD;";
 
@@ -47,26 +48,53 @@ public class DataController implements Initializable {
     @FXML
     void goFullScreen() {
         LotteryApp.switchToFullScreenMode();
-        fullScreenButton.setVisible(false);
+        setWindowedGraphicsAndAction();
     }
+
+    public void goWindowed() {
+        LotteryApp.switchToWindowedMode();
+        setFullScreenGraphicsAndAction();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         startButton.setOnMouseEntered(_ -> startButton.setStyle(HOVERED_START_BUTTON));
         startButton.setOnMouseExited(_ -> startButton.setStyle(IDLE_START_BUTTON));
 
+        fullScreenButton.setOnMouseEntered(_ -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseExited(_ -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
+
+        setFullScreenGraphicsAndAction();
+
+    }
+
+    void setFullScreenGraphicsAndAction() {
 
         Image imageFullScreen = new Image(String.valueOf(DataController.class
                 .getClassLoader()
-                .getResource("vector.png")));
+                .getResource("fs.png")));
         ImageView view = new ImageView(imageFullScreen);
         view.setFitHeight(15);
         view.setPreserveRatio(true);
         fullScreenButton.setGraphic(view);
         fullScreenButton.setPrefSize(15, 15);
 
-        fullScreenButton.setOnMouseEntered(_ -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
-        fullScreenButton.setOnMouseExited(_ -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
-
+        fullScreenButton.setOnAction(_ -> goFullScreen());
     }
+
+    void setWindowedGraphicsAndAction() {
+
+        Image imageWindowed = new Image(String.valueOf(DataController.class
+                .getClassLoader()
+                .getResource("fs_reverse.png")));
+        ImageView view = new ImageView(imageWindowed);
+        view.setFitHeight(15);
+        view.setPreserveRatio(true);
+        fullScreenButton.setGraphic(view);
+        fullScreenButton.setPrefSize(15, 15);
+
+        fullScreenButton.setOnAction(_ -> goWindowed());
+    }
+
 }

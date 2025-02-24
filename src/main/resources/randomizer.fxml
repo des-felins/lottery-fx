@@ -12,12 +12,12 @@
     <children>
         <ButtonBar layoutY="346.0" prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: #1E1E1E;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <buttons>
-                <Button fx:id="presentButton" mnemonicParsing="false" onAction="#congratulate" style="-fx-background-color: #85D888;" text="Present" textFill="WHITE">
+                <Button fx:id="repeatButton" mnemonicParsing="false" onAction="#removeCandidateAndRepeat" style="-fx-background-color: #C961B3;" text="Start again" textFill="WHITE">
                     <font>
                         <Font name="Verdana" size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="repeatButton" mnemonicParsing="false" onAction="#removeCandidateAndRepeat" style="-fx-background-color: #C961B3;" text="Start again" textFill="WHITE">
+                <Button fx:id="presentButton" mnemonicParsing="false" onAction="#congratulate" style="-fx-background-color: #85D888;" text="Present" textFill="WHITE">
                     <font>
                         <Font name="Verdana" size="20.0" />
                     </font>
@@ -27,11 +27,18 @@
                 <Insets right="10.0" />
             </padding>
         </ButtonBar>
-        <Label fx:id="dataLabel" alignment="CENTER" layoutX="171.0" prefHeight="350.0" prefWidth="600.0" text="Label" textFill="#85d888" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label fx:id="dataLabel" alignment="CENTER" layoutX="171.0" layoutY="55.0" prefHeight="246.0" prefWidth="600.0" text="Label" textFill="#85d888" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
             <font>
                 <Font name="Verdana" size="50.0" />
             </font>
         </Label>
-      <ImageView fx:id="celebrationImage" fitHeight="344.0" fitWidth="600.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fx:id="bottomImage" fitHeight="134.0" fitWidth="220.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="209.0" />
+      <Button fx:id="fsButton" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onAction="#goFullScreen" prefHeight="26.0" prefWidth="23.0" style="-fx-background-color: #2C2C2C;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <ImageView fx:id="topImage" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="exitButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#quitApp" style="-fx-background-color: #7F38D8;" text="Exit" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

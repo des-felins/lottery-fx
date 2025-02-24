@@ -1,6 +1,7 @@
 package dev.cat;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -13,6 +14,7 @@ import java.util.List;
 public class LotteryApp extends Application {
 
     private static Stage stage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -44,6 +46,12 @@ public class LotteryApp extends Application {
 
         LotteryController controller = loader.getController();
         controller.extractData(list, needMasking);
+        if(stage.isFullScreen()) {
+            controller.setWindowedGraphicsAndAction();
+        }
+        else {
+            controller.setFullScreenGraphicsAndAction();
+        }
         stage.show();
 
         controller.shuffleAndDisplayNames();
@@ -52,6 +60,14 @@ public class LotteryApp extends Application {
 
     public static void switchToFullScreenMode() {
         stage.setFullScreen(true);
+    }
+
+    public static void switchToWindowedMode() {
+        stage.setFullScreen(false);
+    }
+
+    public static void exit() {
+        Platform.exit();
     }
 
     public static void main(String[] args) {

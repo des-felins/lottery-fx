@@ -29,10 +29,19 @@ public class LotteryController implements Initializable {
     private Button presentButton;
 
     @FXML
-    private ImageView celebrationImage;
+    private ImageView topImage;
+
+    @FXML
+    private ImageView bottomImage;
 
     @FXML
     private Button repeatButton;
+
+    @FXML
+    private Button fsButton;
+
+    @FXML
+    private Button exitButton;
 
     private Set<String> names = new HashSet<>();
 
@@ -45,6 +54,12 @@ public class LotteryController implements Initializable {
 
     private static final String IDLE_PRESENT_BUTTON = "-fx-background-color: #85D888;";
     private static final String HOVERED_PRESENT_BUTTON = "-fx-background-color: #56A458;";
+
+    private static final String HOVERED_FS_BUTTON = "-fx-background-color:  #1E1E1E;";
+    private static final String IDLE_FS_BUTTON = "-fx-background-color: #2C2C2C;";
+
+    private static final String IDLE_EXIT_BUTTON = "-fx-background-color:  #7F38D8;";
+    private static final String HOVERED_EXIT_BUTTON = "-fx-background-color: #63329F;";
 
 
     @FXML
@@ -60,7 +75,12 @@ public class LotteryController implements Initializable {
         Image fireworks = new Image(String.valueOf(LotteryController.class
                 .getClassLoader()
                 .getResource("fireworks1.gif")));
-        celebrationImage.setImage(fireworks);
+        topImage.setImage(fireworks);
+        topImage.setFitHeight(250);
+        topImage.setPreserveRatio(true);
+        bottomImage.setImage(fireworks);
+        bottomImage.setFitHeight(250);
+        bottomImage.setPreserveRatio(true);
 
 
         ScaleTransition scale = new ScaleTransition(Duration.seconds(1), dataLabel);
@@ -86,6 +106,15 @@ public class LotteryController implements Initializable {
 
         repeatButton.setOnMouseEntered(_ -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
         repeatButton.setOnMouseExited(_ -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
+
+
+        fsButton.setOnMouseEntered(_ -> fsButton.setStyle(HOVERED_FS_BUTTON));
+        fsButton.setOnMouseExited(_ -> fsButton.setStyle(IDLE_FS_BUTTON));
+
+        exitButton.setOnMouseEntered(_ -> exitButton.setStyle(HOVERED_EXIT_BUTTON));
+        exitButton.setOnMouseExited(_ -> exitButton.setStyle(IDLE_EXIT_BUTTON));
+
+        setFullScreenGraphicsAndAction();
 
     }
 
@@ -153,4 +182,50 @@ public class LotteryController implements Initializable {
 
         names.addAll(list);
     }
+
+    @FXML
+    void goFullScreen() {
+        LotteryApp.switchToFullScreenMode();
+        setWindowedGraphicsAndAction();
+    }
+
+    public void goWindowed() {
+        LotteryApp.switchToWindowedMode();
+        setFullScreenGraphicsAndAction();
+
+    }
+
+    void setFullScreenGraphicsAndAction() {
+
+        Image imageFullScreen = new Image(String.valueOf(DataController.class
+                .getClassLoader()
+                .getResource("fs.png")));
+        ImageView view = new ImageView(imageFullScreen);
+        view.setFitHeight(15);
+        view.setPreserveRatio(true);
+        fsButton.setGraphic(view);
+        fsButton.setPrefSize(15, 15);
+
+        fsButton.setOnAction(_ -> goFullScreen());
+    }
+
+    void setWindowedGraphicsAndAction() {
+
+        Image imageWindowed = new Image(String.valueOf(DataController.class
+                .getClassLoader()
+                .getResource("fs_reverse.png")));
+        ImageView view = new ImageView(imageWindowed);
+        view.setFitHeight(15);
+        view.setPreserveRatio(true);
+        fsButton.setGraphic(view);
+        fsButton.setPrefSize(15, 15);
+
+        fsButton.setOnAction(_ -> goWindowed());
+    }
+
+    @FXML
+    public void quitApp(ActionEvent event) {
+        LotteryApp.exit();
+    }
+
 }
