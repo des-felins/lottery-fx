@@ -21,7 +21,7 @@ import java.util.*;
 public class LotteryController implements Initializable {
 
     public static final int POTENTIAL_WINNERS_LIST = 300;
-    public static final int TARGET_DURATION_MS = 2000;
+    public static final int TARGET_DURATION_MS = 15000;
     @FXML
     private Label dataLabel;
 
@@ -66,6 +66,8 @@ public class LotteryController implements Initializable {
     void congratulate(ActionEvent event) {
         name.setValue("Congratulations, " + name.getValue() + "!");
         addAnimationToLabel();
+        presentButton.setVisible(false);
+        repeatButton.setVisible(false);
 
     }
 
