@@ -15,6 +15,71 @@
         <start-class>dev.cat.LotteryApp</start-class>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>0.10.5</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>dev.cat.LotteryApp</mainClass>
+                            <agent>
+                                <enabled>true</enabled>
+                                <defaultMode>Direct</defaultMode>
+                                <modes>
+                                    <direct>config-output-dir=native/agent-output</direct>
+                                </modes>
+                                <metadataCopy>
+                                    <disabledStages>
+                                        <stage>test</stage>
+                                    </disabledStages>
+                                    <merge>true</merge>
+                                    <outputDirectory>src/test/resources/META-INF/native-image</outputDirectory>
+                                </metadataCopy>
+                            </agent>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>java-agent</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>test</phase>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <workingDirectory>target</workingDirectory>
+                                    <arguments>
+                                        <argument>-classpath</argument>
+                                        <classpath/>
+                                        <argument>dev.cat.LotteryApp</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
