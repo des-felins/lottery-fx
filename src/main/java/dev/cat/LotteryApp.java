@@ -21,6 +21,8 @@ public class LotteryApp extends Application {
 
         stage = primaryStage;
 
+        stage.setOnCloseRequest(e -> exit());
+
         FXMLLoader loader = new FXMLLoader();
         URL resourceUrl = LotteryApp.class.getClassLoader().getResource("data-view.fxml");
         loader.setLocation(resourceUrl);
@@ -67,7 +69,8 @@ public class LotteryApp extends Application {
     }
 
     public static void exit() {
-        Platform.exit();
+        //Platform.exit();
+        stage.close();
     }
 
     public static void main(String[] args) {

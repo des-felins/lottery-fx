@@ -12,5 +12,5 @@ To make changes to this application, you need to install a JDK with FX bundle, f
 
 E.g., with SDKMAN:
 ```bash
-sdk install java 23.0.1.fx-librca
+sdk install java 21.0.6.fx-librca
 ```

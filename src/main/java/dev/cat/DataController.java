@@ -59,11 +59,11 @@ public class DataController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startButton.setOnMouseEntered(_ -> startButton.setStyle(HOVERED_START_BUTTON));
-        startButton.setOnMouseExited(_ -> startButton.setStyle(IDLE_START_BUTTON));
+        startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_START_BUTTON));
+        startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_START_BUTTON));
 
-        fullScreenButton.setOnMouseEntered(_ -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
-        fullScreenButton.setOnMouseExited(_ -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseEntered(e -> fullScreenButton.setStyle(HOVERED_FULL_SCREEN_BUTTON));
+        fullScreenButton.setOnMouseExited(e -> fullScreenButton.setStyle(IDLE_FULL_SCREEN_BUTTON));
 
         setFullScreenGraphicsAndAction();
 
@@ -80,7 +80,7 @@ public class DataController implements Initializable {
         fullScreenButton.setGraphic(view);
         fullScreenButton.setPrefSize(15, 15);
 
-        fullScreenButton.setOnAction(_ -> goFullScreen());
+        fullScreenButton.setOnAction(e -> goFullScreen());
     }
 
     void setWindowedGraphicsAndAction() {
@@ -94,7 +94,7 @@ public class DataController implements Initializable {
         fullScreenButton.setGraphic(view);
         fullScreenButton.setPrefSize(15, 15);
 
-        fullScreenButton.setOnAction(_ -> goWindowed());
+        fullScreenButton.setOnAction(e -> goWindowed());
     }
 
 }

@@ -103,18 +103,18 @@ public class LotteryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         dataLabel.textProperty().bind(name);
 
-        presentButton.setOnMouseEntered(_ -> presentButton.setStyle(HOVERED_PRESENT_BUTTON));
-        presentButton.setOnMouseExited(_ -> presentButton.setStyle(IDLE_PRESENT_BUTTON));
+        presentButton.setOnMouseEntered(e -> presentButton.setStyle(HOVERED_PRESENT_BUTTON));
+        presentButton.setOnMouseExited(e -> presentButton.setStyle(IDLE_PRESENT_BUTTON));
 
-        repeatButton.setOnMouseEntered(_ -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
-        repeatButton.setOnMouseExited(_ -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
+        repeatButton.setOnMouseEntered(e -> repeatButton.setStyle(HOVERED_REPEAT_BUTTON));
+        repeatButton.setOnMouseExited(e -> repeatButton.setStyle(IDLE_REPEAT_BUTTON));
 
 
-        fsButton.setOnMouseEntered(_ -> fsButton.setStyle(HOVERED_FS_BUTTON));
-        fsButton.setOnMouseExited(_ -> fsButton.setStyle(IDLE_FS_BUTTON));
+        fsButton.setOnMouseEntered(e -> fsButton.setStyle(HOVERED_FS_BUTTON));
+        fsButton.setOnMouseExited(e -> fsButton.setStyle(IDLE_FS_BUTTON));
 
-        exitButton.setOnMouseEntered(_ -> exitButton.setStyle(HOVERED_EXIT_BUTTON));
-        exitButton.setOnMouseExited(_ -> exitButton.setStyle(IDLE_EXIT_BUTTON));
+        exitButton.setOnMouseEntered(e_ -> exitButton.setStyle(HOVERED_EXIT_BUTTON));
+        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_EXIT_BUTTON));
 
         setFullScreenGraphicsAndAction();
 
@@ -156,7 +156,7 @@ public class LotteryController implements Initializable {
             double dur = interpolator.interpolate(1, 1000, (double) i / shuffledNames.size());
             totalDuration += dur;
             var index = i;
-            KeyFrame frame = new KeyFrame(Duration.millis(totalDuration), _ -> name.setValue(shuffledNames.get(index)));
+            KeyFrame frame = new KeyFrame(Duration.millis(totalDuration), e -> name.setValue(shuffledNames.get(index)));
             timeline.getKeyFrames().add(frame);
             if (totalDuration > TARGET_DURATION_MS) {
                 break;
@@ -208,7 +208,7 @@ public class LotteryController implements Initializable {
         fsButton.setGraphic(view);
         fsButton.setPrefSize(15, 15);
 
-        fsButton.setOnAction(_ -> goFullScreen());
+        fsButton.setOnAction(e -> goFullScreen());
     }
 
     void setWindowedGraphicsAndAction() {
@@ -222,7 +222,7 @@ public class LotteryController implements Initializable {
         fsButton.setGraphic(view);
         fsButton.setPrefSize(15, 15);
 
-        fsButton.setOnAction(_ -> goWindowed());
+        fsButton.setOnAction(e -> goWindowed());
     }
 
     @FXML
