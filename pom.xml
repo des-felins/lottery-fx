@@ -35,6 +35,8 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <imageName>raffle</imageName>
+                            <outputDirectory>target/native</outputDirectory>
                             <mainClass>dev.cat.LotteryApp</mainClass>
                             <buildArgs>
                                 <buildArg>-H:ConfigurationFileDirectories=./agent-data</buildArg>
