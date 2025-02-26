@@ -54,7 +54,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref }}
+          tag: v1.0.0
+          release_name: native-image
           file: "target/native/raffle-${{ matrix. platform }}.zip"
           overwrite: true
           make_latest: true
