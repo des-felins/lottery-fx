@@ -32,8 +32,10 @@ jobs:
           java-version: '21'
           java-package: 'jdk+fx'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
           cache: maven
+
+      - name: Install libraries
+        run: sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
 
       - name: Build
         shell: bash
