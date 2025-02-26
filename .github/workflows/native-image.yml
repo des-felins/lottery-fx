@@ -28,10 +28,11 @@ jobs:
 
       - uses: graalvm/setup-graalvm@v1
         with:
+          distribution: 'liberica'
           java-version: '21'
-          java-package: 'jdk-fx'
+          java-package: 'jdk+fx'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          distribution: liberica
+
           cache: maven
 
       - name: Build
