@@ -1,4 +1,4 @@
-# Lottery: an application choosing a random name/number from a list
+# Raffle-fx: an application choosing a random name/number from a list
 
 A JavaFX application for shuffling a list of Strings to choose a winner participant.
 If the participant in present, they are congratulated.
