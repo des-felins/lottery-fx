@@ -69,7 +69,6 @@ public class LotteryApp extends Application {
     }
 
     public static void exit() {
-        //Platform.exit();
         stage.close();
     }
 

@@ -36,20 +36,9 @@
                         </executions>
                         <configuration>
                             <mainClass>dev.cat.LotteryApp</mainClass>
-                            <agent>
-                                <enabled>true</enabled>
-                                <defaultMode>Direct</defaultMode>
-                                <modes>
-                                    <direct>config-output-dir=native/agent-output</direct>
-                                </modes>
-<!--                                <metadataCopy>-->
-<!--                                    <disabledStages>-->
-<!--                                        <stage>test</stage>-->
-<!--                                    </disabledStages>-->
-<!--                                    <merge>true</merge>-->
-<!--                                    <outputDirectory>src/resources/META-INF/native-image</outputDirectory>-->
-<!--                                </metadataCopy>-->
-                            </agent>
+                            <buildArgs>
+                                <buildArg>-H:ConfigurationFileDirectories=./agent-data</buildArg>
+                            </buildArgs>
                         </configuration>
                     </plugin>
                 </plugins>
